@@ -15,7 +15,7 @@ const Slider = ({ children, infinite, bullets, arrowsNav }) => {
 
     const sliderWithNav = new SliderNav(options);
     sliderWithNav.init();
-  })
+  }, [])
 
   return (children);
 };

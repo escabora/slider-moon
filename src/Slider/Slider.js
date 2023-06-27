@@ -235,10 +235,10 @@ export default class SliderNav extends Slider {
   }
 
   createBullets() {
-    const controlContainer = createEl('ul', 'slider-pagination');
+    const controlContainer = createEl('ul', 'slider-bullets');
 
     this.slideArray.forEach((item, index) => {
-      const itemElement = createEl('li', 'slider-pagination-item');
+      const itemElement = createEl('li', 'slider-bullets-item');
       itemElement.innerText = index + 1;
       itemElement.addEventListener('click', (ev) => {
         ev.preventDefault();
