@@ -1,0 +1,127 @@
+.slider {
+  display: flex;
+}
+
+.slider:hover {
+  will-change: transform;
+}
+
+.slider li {
+  flex-shrink: 0;
+  width: 100vw;
+  max-width: 80vw;
+  margin: 0 20px;
+  border-radius: 4px;
+  overflow: hidden;
+  opacity: .8;
+  transform: scale(.8);
+  transition: transform .4s ease-in-out;
+}
+
+.slider-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+
+.slider li.slider-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.slider-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.slider-pagination .slider-pagination-item {
+  width: 12px;
+  height: 12px;
+  background-color: purple;
+  border-radius: 50%;
+  overflow: hidden;
+  text-indent: -999px;
+  cursor: pointer;
+  margin: 5px;
+  transition: .3s ease-in-out;
+}
+
+.slider-pagination .slider-pagination-item:hover,
+.slider-pagination .slider-pagination-item.active {
+  background-color: black;
+  transform: scale(1.2);
+}
+
+.slider-thumbs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 40px 0px 20px;
+}
+
+.slider-thumb {
+  opacity: .8;
+  transform: scale(.8);
+  transition: transform .3s ease-in-out;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 2px;
+  cursor: pointer;
+}
+
+.slider-thumb.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.slider-nav-prev,
+.slider-nav-next {
+  position: absolute;
+  top: 50%;
+  height: 40px;
+  width: 40px;
+  border: 0;
+  font-size: 0;
+  border-radius: 50%;
+  transition: transform .3s ease-in-out;
+  cursor: pointer;
+  background: url('../img/arrow.svg') center center no-repeat;
+  background-color: purple;
+}
+
+.slider-nav-prev:hover,
+.slider-nav-next:hover {
+  transform: scale(1.2);
+}
+
+.slider-nav-prev:hover {
+  transform: scale(1.2) rotateY(180deg);
+}
+
+.slider-nav-prev {
+  left: calc(50% - 46vw);
+  transform: rotateY(180deg);
+}
+
+.slider-nav-next {
+  right: calc(50% - 46vw);
+}
+
+@media only screen and (max-width: 757px) {
+  .slider-nav-prev,
+  .slider-nav-next {
+      top: 35%;
+  }
+  .slider-nav-prev {
+      left: 10px;
+  }
+  .slider-nav-next {
+      right: 10px;
+  }
+  .slider-nav-prev:hover,
+  .slider-nav-next:hover {
+      transform: unset;
+  }
+}
