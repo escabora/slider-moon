@@ -14,7 +14,7 @@
   border-radius: 4px;
   overflow: hidden;
   opacity: .8;
-  transition: transform .4s ease-in-out;
+  transition: transform .7s ease-in-out;
 }
 
 .slider-wrapper {
@@ -22,7 +22,7 @@
   position: relative;
 }
 
-.slider li.slider-active {
+.slider li.active {
   opacity: 1;
 }
 
@@ -35,7 +35,8 @@
 .slider-bullets .slider-bullets-item {
   width: 12px;
   height: 12px;
-  background-color: purple;
+  background-color: white;
+  border: 1px solid black;
   border-radius: 50%;
   overflow: hidden;
   text-indent: -999px;
@@ -61,8 +62,8 @@
   border-radius: 50%;
   transition: transform .3s ease-in-out;
   cursor: pointer;
-  background: url('../img/arrow.svg') center center no-repeat;
-  background-color: purple;
+  background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNNy4zMyAyNGwtMi44My0yLjgyOSA5LjMzOS05LjE3NS05LjMzOS05LjE2NyAyLjgzLTIuODI5IDEyLjE3IDExLjk5NnoiLz48L3N2Zz4=') center center no-repeat;
+  background-color: white;
 }
 
 .slider-nav-prev:hover,

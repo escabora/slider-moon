@@ -12,7 +12,8 @@ export class Slider {
     this.infinite = options.infinite || false;
     this.bullets = options.bullets;
     this.arrowsNav = options.arrowsNav;
-    this.activeClass = 'slider-active';
+    this.callback = options.callback;
+    this.activeClass = 'active';
 
     if (this.slide && this.wrapper) {
       this.bindEvents();
@@ -125,8 +126,8 @@ export class Slider {
     this.dist.finalPosition = activeSlide.position;
     this.changeActiveClass();
 
-    const newEvent = new CustomEvent('slideChanged');
-    this.slide.dispatchEvent(newEvent);
+    const eventCreate = new CustomEvent('changed');
+    this.slide.dispatchEvent(eventCreate);
   }
 
   changeActiveClass() {
@@ -202,7 +203,8 @@ export default class SliderNav extends Slider {
       if (this.arrowsNav) {
         this.appendArrows();
       }
-      this.slide.addEventListener('slideChanged', () => {
+      this.slide.addEventListener('changed', () => {
+        this.callback();
         this.removeActiveClassFromPaginationBullets();
         this.addActiveClassFromPaginationBullets(
           this.controlChildrens[this.index.active]
