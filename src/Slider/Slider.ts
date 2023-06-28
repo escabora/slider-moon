@@ -1,19 +1,45 @@
 import { debounce, createEl } from '../utils';
 
 export class Slider {
-  constructor(options) {
-    this.slide = document.querySelector(options.slide);
-    this.wrapper = document.querySelector(options.wrapper);
+  options: any;
+  slide: HTMLElement;
+  wrapper: HTMLElement;
+  dist: object | any;
+  infinite: boolean;
+  bullets: boolean;
+  arrowsNav: boolean;
+  callback: Function | any;
+  activeClass: string;
+  slideArray: Array<any>;
+  index: { prev: number; active: number; next: number };
+
+  constructor(options: {
+    slide: string;
+    wrapper: string;
+    infinite: boolean;
+    bullets: boolean;
+    arrowsNav: boolean;
+    callback: Function | null;
+  }) {
+    this.slide = document.querySelector(options.slide) as HTMLElement;
+    this.wrapper = document.querySelector(options.wrapper) as HTMLElement;
     this.dist = {
       finalPosition: 0,
       startX: 0,
       moviment: 0,
+      movePosition: 0,
     };
     this.infinite = options.infinite || false;
     this.bullets = options.bullets;
     this.arrowsNav = options.arrowsNav;
     this.callback = options.callback;
     this.activeClass = 'active';
+    this.slideArray = [];
+    this.index = {
+      prev: 0,
+      active: 0,
+      next: 0,
+    };
 
     if (this.slide && this.wrapper) {
       this.bindEvents();
@@ -27,21 +53,21 @@ export class Slider {
     }
   }
 
-  transition(active) {
+  transition(active: boolean) {
     this.slide.style.transition = active ? 'transform .3s' : '';
   }
 
-  move(distX) {
+  move(distX: number) {
     this.dist.movePosition = distX;
     this.slide.style.transform = `translate3d(${distX}px, 0, 0)`;
   }
 
-  updatePosition(clientX) {
+  updatePosition(clientX: number) {
     this.dist.moviment = (this.dist.startX - clientX) * 1.6;
     return this.dist.finalPosition - this.dist.moviment;
   }
 
-  onStart(ev) {
+  onStart(ev: Event | any) {
     let moveType;
     if (ev.type === 'mousedown') {
       ev.preventDefault();
@@ -55,14 +81,14 @@ export class Slider {
     this.wrapper.addEventListener(moveType, this.onMove);
   }
 
-  onMove(ev) {
+  onMove(ev: Event | any) {
     const pointerPosition =
       ev.type === 'mousemove' ? ev.clientX : ev.changedTouches[0].clientX;
     const finalPosition = this.updatePosition(pointerPosition);
     this.move(finalPosition);
   }
 
-  onEnd(ev) {
+  onEnd(ev: Event | any) {
     const moveType = ev.type === 'mouseup' ? 'mousemove' : 'touchmove';
     this.wrapper.removeEventListener(moveType, this.onMove);
     this.dist.finalPosition = this.dist.movePosition;
@@ -87,13 +113,13 @@ export class Slider {
     this.wrapper.addEventListener('touchend', this.onEnd);
   }
 
-  slidePosition(slide) {
+  slidePosition(slide: HTMLElement) {
     const margin = (this.wrapper.offsetWidth - slide.offsetWidth) / 2;
     return -(slide.offsetLeft - margin);
   }
 
   config() {
-    this.slideArray = [...this.slide.children].map((element) => {
+    this.slideArray = [...this.slide.children].map((element: any) => {
       const position = this.slidePosition(element);
       return {
         position,
@@ -102,7 +128,7 @@ export class Slider {
     });
   }
 
-  indexNav(index) {
+  indexNav(index: number) {
     const last = this.slideArray.length - 1;
     if (this.infinite) {
       this.index = {
@@ -112,22 +138,22 @@ export class Slider {
       };
     } else {
       this.index = {
-        prev: index ? index - 1 : undefined,
+        prev: index ? index - 1 : 0,
         active: index,
-        next: index === last ? undefined : index + 1,
+        next: index === last ? 0 : index + 1,
       };
     }
   }
 
-  changeSlide(index) {
+  changeSlide(index: number) {
     const activeSlide = this.slideArray[index];
     this.move(activeSlide.position);
     this.indexNav(index);
     this.dist.finalPosition = activeSlide.position;
     this.changeActiveClass();
 
-    const eventCreate = new CustomEvent('changed');
-    this.slide.dispatchEvent(eventCreate);
+    const createEvent = new CustomEvent('changed');
+    this.slide.dispatchEvent(createEvent);
   }
 
   changeActiveClass() {
@@ -191,9 +217,16 @@ export class Slider {
 }
 
 export default class SliderNav extends Slider {
-  constructor(...args) {
-    super(...args);
-    this.activeNavigationClass = 'active';
+  activeNavClass: string;
+  prevEl: HTMLElement | any;
+  nextEl: HTMLElement | any;
+  navigationContainer: HTMLElement | any;
+  controlChildrens: HTMLElement | any;
+  control: HTMLElement | any;
+
+  constructor(args: any) {
+    super(args);
+    this.activeNavClass = 'active';
 
     if (this.slide && this.wrapper) {
       this.addEvents();
@@ -205,8 +238,8 @@ export default class SliderNav extends Slider {
       }
       this.slide.addEventListener('changed', () => {
         this.callback();
-        this.removeActiveClassFromPaginationBullets();
-        this.addActiveClassFromPaginationBullets(
+        this.removeClassBulletCurrent();
+        this.addClassBulletCurrent(
           this.controlChildrens[this.index.active]
         );
       });
@@ -239,13 +272,13 @@ export default class SliderNav extends Slider {
   createBullets() {
     const controlContainer = createEl('ul', 'slider-bullets');
 
-    this.slideArray.forEach((item, index) => {
-      const itemElement = createEl('li', 'slider-bullets-item');
+    this.slideArray.forEach((_, index) => {
+      const itemElement = createEl('li', 'slider-bullets-item') as HTMLElement | any;
       itemElement.innerText = index + 1;
-      itemElement.addEventListener('click', (ev) => {
+      itemElement.addEventListener('click', (ev: Event) => {
         ev.preventDefault();
-        this.removeActiveClassFromPaginationBullets();
-        this.addActiveClassFromPaginationBullets(ev.currentTarget);
+        this.removeClassBulletCurrent();
+        this.addClassBulletCurrent(ev.currentTarget as HTMLElement);
         this.changeSlide(index);
       });
       controlContainer.appendChild(itemElement);
@@ -253,18 +286,18 @@ export default class SliderNav extends Slider {
     this.control = controlContainer;
     this.controlChildrens = [...this.control.children];
     this.wrapper.appendChild(controlContainer);
-    this.addActiveClassFromPaginationBullets(
+    this.addClassBulletCurrent(
       this.controlChildrens[this.index.active]
     );
   }
 
-  addActiveClassFromPaginationBullets(target) {
-    target.classList.add(this.activeNavigationClass);
+  addClassBulletCurrent(target: HTMLElement) {
+    target.classList.add(this.activeNavClass);
   }
 
-  removeActiveClassFromPaginationBullets() {
+  removeClassBulletCurrent() {
     [...this.control.children].forEach((item) =>
-      item.classList.remove(this.activeNavigationClass)
+      item.classList.remove(this.activeNavClass)
     );
   }
 }
