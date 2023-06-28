@@ -1,12 +1,17 @@
 .slider {
+  overflow: hidden;
+  position: relative;
+}
+
+.slider-wrapper {
   display: flex;
 }
 
-.slider:hover {
+.slider-wrapper:hover {
   will-change: transform;
 }
 
-.slider li {
+.slider-wrapper li {
   flex-shrink: 0;
   width: 100vw;
   max-width: 70vw;
@@ -17,12 +22,7 @@
   transition: transform .7s ease-in-out;
 }
 
-.slider-wrapper {
-  overflow: hidden;
-  position: relative;
-}
-
-.slider li.active {
+.slider-wrapper li.active {
   opacity: 1;
 }
 

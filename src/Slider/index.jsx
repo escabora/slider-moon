@@ -2,11 +2,10 @@ import React, { useEffect } from 'react';
 import './Slider.css';
 import SliderNav from './Slider';
 
-const Slider = ({ children, infinite, bullets, arrowsNav, callback }) => {
+const Slider = ({ slideClass, children, infinite, bullets, arrowsNav, callback }) => {
   useEffect(() => {
     const options = {
-      slide: '.slider',
-      wrapper: '.slider-wrapper',
+      slideClass,
       infinite,
       bullets,
       arrowsNav,

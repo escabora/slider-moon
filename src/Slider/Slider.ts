@@ -2,8 +2,8 @@ import { debounce, createEl } from '../utils';
 
 export class Slider {
   options: any;
+  slideClass: HTMLElement;
   slide: HTMLElement;
-  wrapper: HTMLElement;
   dist: object | any;
   infinite: boolean;
   bullets: boolean;
@@ -14,15 +14,15 @@ export class Slider {
   index: { prev: number; active: number; next: number };
 
   constructor(options: {
+    slideClass: string;
     slide: string;
-    wrapper: string;
     infinite: boolean;
     bullets: boolean;
     arrowsNav: boolean;
     callback: Function | null;
   }) {
-    this.slide = document.querySelector(options.slide) as HTMLElement;
-    this.wrapper = document.querySelector(options.wrapper) as HTMLElement;
+    this.slideClass = document.querySelector(`.${options.slideClass}`) as HTMLElement;
+    this.slide = this.slideClass?.querySelector('.slider-wrapper') as HTMLElement;
     this.dist = {
       finalPosition: 0,
       startX: 0,
@@ -41,7 +41,7 @@ export class Slider {
       next: 0,
     };
 
-    if (this.slide && this.wrapper) {
+    if (this.slide && this.slideClass) {
       this.bindEvents();
       this.transition(true);
       this.config();
@@ -78,7 +78,7 @@ export class Slider {
       moveType = 'touchmove';
     }
     this.transition(false);
-    this.wrapper.addEventListener(moveType, this.onMove);
+    this.slideClass.addEventListener(moveType, this.onMove);
   }
 
   onMove(ev: Event | any) {
@@ -90,7 +90,7 @@ export class Slider {
 
   onEnd(ev: Event | any) {
     const moveType = ev.type === 'mouseup' ? 'mousemove' : 'touchmove';
-    this.wrapper.removeEventListener(moveType, this.onMove);
+    this.slideClass.removeEventListener(moveType, this.onMove);
     this.dist.finalPosition = this.dist.movePosition;
     this.transition(true);
     this.changeSlideOnEnd();
@@ -107,14 +107,14 @@ export class Slider {
   }
 
   addEvents() {
-    this.wrapper.addEventListener('mousedown', this.onStart);
-    this.wrapper.addEventListener('touchstart', this.onStart);
-    this.wrapper.addEventListener('mouseup', this.onEnd);
-    this.wrapper.addEventListener('touchend', this.onEnd);
+    this.slideClass.addEventListener('mousedown', this.onStart);
+    this.slideClass.addEventListener('touchstart', this.onStart);
+    this.slideClass.addEventListener('mouseup', this.onEnd);
+    this.slideClass.addEventListener('touchend', this.onEnd);
   }
 
   slidePosition(slide: HTMLElement) {
-    const margin = (this.wrapper.offsetWidth - slide.offsetWidth) / 2;
+    const margin = (this.slideClass.offsetWidth - slide.offsetWidth) / 2;
     return -(slide.offsetLeft - margin);
   }
 
@@ -209,7 +209,7 @@ export class Slider {
   }
 
   init() {
-    if (this.slide && this.wrapper) {
+    if (this.slide && this.slideClass) {
       this.addEvents();
     }
     return this;
@@ -228,7 +228,7 @@ export default class SliderNav extends Slider {
     super(args);
     this.activeNavClass = 'active';
 
-    if (this.slide && this.wrapper) {
+    if (this.slide && this.slideClass) {
       this.addEvents();
       if (this.bullets) {
         this.createBullets();
@@ -266,7 +266,7 @@ export default class SliderNav extends Slider {
 
     this.navigationContainer.appendChild(this.prevEl);
     this.navigationContainer.appendChild(this.nextEl);
-    this.wrapper.appendChild(this.navigationContainer);
+    this.slideClass.appendChild(this.navigationContainer);
   }
 
   createBullets() {
@@ -285,7 +285,7 @@ export default class SliderNav extends Slider {
     });
     this.control = controlContainer;
     this.controlChildrens = [...this.control.children];
-    this.wrapper.appendChild(controlContainer);
+    this.slideClass.appendChild(controlContainer);
     this.addClassBulletCurrent(
       this.controlChildrens[this.index.active]
     );
