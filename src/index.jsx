@@ -1,8 +1,8 @@
 import React from 'react'
-import Slider from './Slider'
+import MySlider from './Slider'
 
 const Slider = ({...props}, children) => {
-  return <Slider {...props}>{children}</Slider>
+  return <MySlider {...props}>{children}</MySlider>
 }
 
 export default Slider;

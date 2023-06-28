@@ -285,7 +285,7 @@ react_production_min.version = "18.2.0";
   react.exports = react_production_min;
 }
 var React = react.exports;
-var Slider$2 = "";
+var Slider$3 = "";
 const debounce = (callback, delay) => {
   let timer;
   return (...args) => {
@@ -302,20 +302,33 @@ const createEl = (element, customClass) => {
   elementCreated.classList.add(customClass);
   return elementCreated;
 };
-class Slider$1 {
+class Slider$2 {
   constructor(options) {
-    this.slide = document.querySelector(options.slide);
-    this.wrapper = document.querySelector(options.wrapper);
+    var _a;
+    this.slideClass = document.querySelector(`.${options.slideClass}`);
+    this.slide = (_a = this.slideClass) == null ? void 0 : _a.querySelector(".slider-wrapper");
     this.dist = {
       finalPosition: 0,
       startX: 0,
-      moviment: 0
+      moviment: 0,
+      movePosition: 0
     };
     this.infinite = options.infinite || false;
     this.bullets = options.bullets;
     this.arrowsNav = options.arrowsNav;
-    this.activeClass = "slider-active";
-    if (this.slide && this.wrapper) {
+    this.callback = options.callback;
+    this.animation = options.animation;
+    this.activeClass = "active";
+    this.slideArray = [];
+    this.index = {
+      prev: 0,
+      active: 0,
+      next: 0
+    };
+    if (this.animation) {
+      this.slideClass.classList.add(`animation-${this.animation}`);
+    }
+    if (this.slide && this.slideClass) {
       this.bindEvents();
       this.transition(true);
       this.config();
@@ -323,7 +336,7 @@ class Slider$1 {
       this.changeSlide(this.index.active);
       this.changeActiveClass();
       this.resizeEvent();
-      this.keyNavigation();
+      this.keyNav();
     }
   }
   transition(active) {
@@ -348,7 +361,7 @@ class Slider$1 {
       moveType = "touchmove";
     }
     this.transition(false);
-    this.wrapper.addEventListener(moveType, this.onMove);
+    this.slideClass.addEventListener(moveType, this.onMove);
   }
   onMove(ev) {
     const pointerPosition = ev.type === "mousemove" ? ev.clientX : ev.changedTouches[0].clientX;
@@ -357,7 +370,7 @@ class Slider$1 {
   }
   onEnd(ev) {
     const moveType = ev.type === "mouseup" ? "mousemove" : "touchmove";
-    this.wrapper.removeEventListener(moveType, this.onMove);
+    this.slideClass.removeEventListener(moveType, this.onMove);
     this.dist.finalPosition = this.dist.movePosition;
     this.transition(true);
     this.changeSlideOnEnd();
@@ -372,13 +385,13 @@ class Slider$1 {
     }
   }
   addEvents() {
-    this.wrapper.addEventListener("mousedown", this.onStart);
-    this.wrapper.addEventListener("touchstart", this.onStart);
-    this.wrapper.addEventListener("mouseup", this.onEnd);
-    this.wrapper.addEventListener("touchend", this.onEnd);
+    this.slideClass.addEventListener("mousedown", this.onStart);
+    this.slideClass.addEventListener("touchstart", this.onStart);
+    this.slideClass.addEventListener("mouseup", this.onEnd);
+    this.slideClass.addEventListener("touchend", this.onEnd);
   }
   slidePosition(slide) {
-    const margin = (this.wrapper.offsetWidth - slide.offsetWidth) / 2;
+    const margin = (this.slideClass.offsetWidth - slide.offsetWidth) / 2;
     return -(slide.offsetLeft - margin);
   }
   config() {
@@ -400,9 +413,9 @@ class Slider$1 {
       };
     } else {
       this.index = {
-        prev: index ? index - 1 : void 0,
+        prev: index ? index - 1 : 0,
         active: index,
-        next: index === last ? void 0 : index + 1
+        next: index === last ? 0 : index + 1
       };
     }
   }
@@ -412,13 +425,11 @@ class Slider$1 {
     this.indexNav(index);
     this.dist.finalPosition = activeSlide.position;
     this.changeActiveClass();
-    const newEvent = new CustomEvent("slideChanged");
-    this.slide.dispatchEvent(newEvent);
+    const createEvent = new CustomEvent("changed");
+    this.slide.dispatchEvent(createEvent);
   }
   changeActiveClass() {
-    this.slideArray.forEach(
-      ({ element }) => element.classList.remove(this.activeClass)
-    );
+    this.slideArray.forEach(({ element }) => element.classList.remove(this.activeClass));
     this.slideArray[this.index.active].element.classList.add(this.activeClass);
   }
   activePrev() {
@@ -440,7 +451,7 @@ class Slider$1 {
   resizeEvent() {
     window.addEventListener("resize", this.onResize);
   }
-  keyNavigation() {
+  keyNav() {
     document.addEventListener("keyup", (ev) => {
       if (ev.key === "ArrowRight") {
         this.activeNext();
@@ -456,20 +467,20 @@ class Slider$1 {
     this.activePrev = this.activePrev.bind(this);
     this.activeNext = this.activeNext.bind(this);
     this.onResize = debounce(this.onResize.bind(this), 150);
-    this.keyNavigation = this.keyNavigation.bind(this);
+    this.keyNav = this.keyNav.bind(this);
   }
   init() {
-    if (this.slide && this.wrapper) {
+    if (this.slide && this.slideClass) {
       this.addEvents();
     }
     return this;
   }
 }
-class SliderNav extends Slider$1 {
-  constructor(...args) {
-    super(...args);
-    this.activeNavigationClass = "active";
-    if (this.slide && this.wrapper) {
+class SliderNav extends Slider$2 {
+  constructor(args) {
+    super(args);
+    this.activeNavClass = "active";
+    if (this.slide && this.slideClass) {
       this.addEvents();
       if (this.bullets) {
         this.createBullets();
@@ -477,11 +488,10 @@ class SliderNav extends Slider$1 {
       if (this.arrowsNav) {
         this.appendArrows();
       }
-      this.slide.addEventListener("slideChanged", () => {
-        this.removeActiveClassFromPaginationBullets();
-        this.addActiveClassFromPaginationBullets(
-          this.controlChildrens[this.index.active]
-        );
+      this.slide.addEventListener("changed", () => {
+        this.callback();
+        this.removeClassBulletCurrent();
+        this.addClassBulletCurrent(this.controlChildrens[this.index.active]);
       });
     }
   }
@@ -501,55 +511,51 @@ class SliderNav extends Slider$1 {
     this.addEventArrows();
     this.navigationContainer.appendChild(this.prevEl);
     this.navigationContainer.appendChild(this.nextEl);
-    this.wrapper.appendChild(this.navigationContainer);
+    this.slideClass.appendChild(this.navigationContainer);
   }
   createBullets() {
-    const controlContainer = createEl("ul", "slider-pagination");
-    this.slideArray.forEach((item, index) => {
-      const itemElement = createEl("li", "slider-pagination-item");
+    const controlContainer = createEl("ul", "slider-bullets");
+    this.slideArray.forEach((_, index) => {
+      const itemElement = createEl("li", "slider-bullets-item");
       itemElement.innerText = index + 1;
       itemElement.addEventListener("click", (ev) => {
         ev.preventDefault();
-        this.removeActiveClassFromPaginationBullets();
-        this.addActiveClassFromPaginationBullets(ev.currentTarget);
+        this.removeClassBulletCurrent();
+        this.addClassBulletCurrent(ev.currentTarget);
         this.changeSlide(index);
       });
       controlContainer.appendChild(itemElement);
     });
     this.control = controlContainer;
     this.controlChildrens = [...this.control.children];
-    this.wrapper.appendChild(controlContainer);
-    this.addActiveClassFromPaginationBullets(
-      this.controlChildrens[this.index.active]
-    );
+    this.slideClass.appendChild(controlContainer);
+    this.addClassBulletCurrent(this.controlChildrens[this.index.active]);
   }
-  addActiveClassFromPaginationBullets(target) {
-    target.classList.add(this.activeNavigationClass);
+  addClassBulletCurrent(target) {
+    target.classList.add(this.activeNavClass);
   }
-  removeActiveClassFromPaginationBullets() {
-    [...this.control.children].forEach(
-      (item) => item.classList.remove(this.activeNavigationClass)
-    );
+  removeClassBulletCurrent() {
+    [...this.control.children].forEach((item) => item.classList.remove(this.activeNavClass));
   }
 }
-const Slider = ({ children, infinite, bullets, arrowsNav }) => {
+const Slider$1 = ({ slideClass, children, infinite, bullets, arrowsNav, callback, animation }) => {
   react.exports.useEffect(() => {
     const options = {
-      slide: ".slider",
-      wrapper: ".slider-wrapper",
+      slideClass,
       infinite,
       bullets,
       arrowsNav,
-      animationTransition: "scale"
+      callback,
+      animation
     };
-    const sliderWithNav = new SliderNav(options);
-    sliderWithNav.init();
-  });
+    const slider = new SliderNav(options);
+    slider.init();
+  }, []);
   return children;
 };
-const MySlider = ({ ...props }, children) => {
-  return /* @__PURE__ */ React.createElement(Slider, {
+const Slider = ({ ...props }, children) => {
+  return /* @__PURE__ */ React.createElement(Slider$1, {
     ...props
   }, children);
 };
-export { MySlider as default };
+export { Slider as default };

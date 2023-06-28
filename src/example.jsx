@@ -13,10 +13,10 @@ ReactDOM.createRoot(document.getElementById('app')).render(
     infinite={true}
     bullets={true}
     arrowsNav={true}
+    animation={'scale'}
     callback={() => {
       console.log('here');
     }}
-    animation={'scale'}
   >
     <div>
       <div className='slider my-slider1'>
