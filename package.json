@@ -1,18 +1,11 @@
 {
   "name": "slider-react-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "author": "Gabriel Escabora <gabrielescabora@gmail.com>",
   "repository": "git@github.com:escabora/color-log.git",
   "license": "MIT",
-  "keywords": [
-    "javascript",
-    "cli",
-    "color",
-    "terminal",
-    "log",
-    "console-log"
-  ],
+  "keywords": [],
   "exports": {
     ".": {
       "import": "./dist/index.es.js",

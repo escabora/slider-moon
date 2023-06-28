@@ -27,7 +27,14 @@ export default defineConfig({
       formats: ['es', 'cjs'],
     },
     rollupOptions: {
-      external: [],
+      external: ['react', 'react/jsx-runtime', 'react-dom'],
+      output: {
+        globals: {
+          react: 'react',
+          'react-dom': 'ReactDOM',
+          'react/jsx-runtime': 'react/jsx-runtime',
+        },
+      },
       plugins: [
         typescriptPaths({
           preserveExtensions: true,
