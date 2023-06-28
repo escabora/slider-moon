@@ -1,7 +1,6 @@
 import { debounce, createEl } from '../utils';
 
 export class Slider {
-  options: any;
   slideClass: HTMLElement;
   slide: HTMLElement;
   dist: object | any;
