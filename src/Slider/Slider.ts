@@ -67,7 +67,7 @@ export class Slider {
     return this.dist.finalPosition - this.dist.moviment;
   }
 
-  onStart(ev: Event | any) {
+  onStart(ev: MouseEvent | any) {
     let moveType;
     if (ev.type === 'mousedown') {
       ev.preventDefault();
@@ -81,14 +81,14 @@ export class Slider {
     this.slideClass.addEventListener(moveType, this.onMove);
   }
 
-  onMove(ev: Event | any) {
+  onMove(ev: MouseEvent | any) {
     const pointerPosition =
       ev.type === 'mousemove' ? ev.clientX : ev.changedTouches[0].clientX;
     const finalPosition = this.updatePosition(pointerPosition);
     this.move(finalPosition);
   }
 
-  onEnd(ev: Event | any) {
+  onEnd(ev: MouseEvent) {
     const moveType = ev.type === 'mouseup' ? 'mousemove' : 'touchmove';
     this.slideClass.removeEventListener(moveType, this.onMove);
     this.dist.finalPosition = this.dist.movePosition;
@@ -110,7 +110,7 @@ export class Slider {
     this.slideClass.addEventListener('mousedown', this.onStart);
     this.slideClass.addEventListener('touchstart', this.onStart);
     this.slideClass.addEventListener('mouseup', this.onEnd);
-    this.slideClass.addEventListener('touchend', this.onEnd);
+    this.slideClass.addEventListener('touchend', this.onEnd as any);
   }
 
   slidePosition(slide: HTMLElement) {
@@ -152,7 +152,7 @@ export class Slider {
     this.dist.finalPosition = activeSlide.position;
     this.changeActiveClass();
 
-    const createEvent = new CustomEvent('changed');
+    const createEvent = new CustomEvent('changed') as Event;
     this.slide.dispatchEvent(createEvent);
   }
 
