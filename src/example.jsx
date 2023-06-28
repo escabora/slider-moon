@@ -16,6 +16,7 @@ ReactDOM.createRoot(document.getElementById('app')).render(
     callback={() => {
       console.log('here');
     }}
+    animation={'scale'}
   >
     <div>
       <div className='slider my-slider1'>
@@ -36,7 +37,7 @@ ReactDOM.createRoot(document.getElementById('app')).render(
     bullets={true}
     arrowsNav={true}
     callback={() => {
-      console.log('here');
+      console.log('here2');
     }}
   >
     <div>

@@ -26,6 +26,16 @@
   opacity: 1;
 }
 
+.animation-scale li {
+  transform: scale(.9);
+  width: 100vw;
+  max-width: 75vw;
+}
+
+.animation-scale li.active {
+  transform: scale(1);
+}
+
 .slider-bullets {
   display: flex;
   justify-content: center;

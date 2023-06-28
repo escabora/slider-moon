@@ -8,6 +8,7 @@ export class Slider {
   bullets: boolean;
   arrowsNav: boolean;
   callback: Function | any;
+  animation: string;
   activeClass: string;
   slideArray: Array<any>;
   index: { prev: number; active: number; next: number };
@@ -19,6 +20,7 @@ export class Slider {
     bullets: boolean;
     arrowsNav: boolean;
     callback: Function | null;
+    animation: string;
   }) {
     this.slideClass = document.querySelector(`.${options.slideClass}`) as HTMLElement;
     this.slide = this.slideClass?.querySelector('.slider-wrapper') as HTMLElement;
@@ -32,6 +34,7 @@ export class Slider {
     this.bullets = options.bullets;
     this.arrowsNav = options.arrowsNav;
     this.callback = options.callback;
+    this.animation = options.animation;
     this.activeClass = 'active';
     this.slideArray = [];
     this.index = {
@@ -39,6 +42,11 @@ export class Slider {
       active: 0,
       next: 0,
     };
+
+
+    if(this.animation) {
+      this.slideClass.classList.add(`animation-${this.animation}`)
+    }
 
     if (this.slide && this.slideClass) {
       this.bindEvents();
