@@ -6,7 +6,7 @@ const Default = () => {
   const items = [0, 1, 2, 3, 4, 5];
   return (
     <Slider
-    slideClass={'my-slider2'}
+    slideClass={'my-slider'}
     infinite={true}
     bullets={true}
     arrowsNav={true}
@@ -15,7 +15,7 @@ const Default = () => {
     }}
   >
     <div>
-      <div className='slider my-slider2'>
+      <div className='slider my-slider'>
         <ul className='slider-wrapper'>
           {items.map((item) => (
             <li key={item}>

@@ -1,0 +1,61 @@
+.theme-dark {
+  --primary: #6a78ff;
+  --background: #070913;
+  --text: #fff;
+  --contentText: #d6d6d6;
+}
+
+.theme-light {
+  --primary: #5b55e0;
+  --background: #fff;
+  --text: #070913;
+  --contentText: #070913;
+}
+
+body {
+  margin: 0;
+  color: var(--text);
+  font-family: 'Open Sans','Helvetica Neue','Helvetica','Arial',sans-serif;
+}
+
+ul {
+  margin: 0;
+}
+
+h1 {
+  color: var(--primary);
+  font-weight: 800;
+}
+
+.theme-dark {
+  background: var(--background);
+}
+
+.main div .slider ul li img {  transition: filter .3s ease-in-out; }
+.theme-dark div .slider ul li img { filter: invert(1); }
+
+.theme-light div .slider .slider-nav .slider-nav-prev,
+.theme-light div .slider .slider-nav .slider-nav-next  {
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAjCAMAAADL21gSAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAARdQTFRFAAAA////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////47yV2QAAAF10Uk5TABK1JCHg/+wwH+LpE9nmJyPcJiIY1+grGuXvMSX0PxHM8zMQz+7SNtoVNQzF9UAO1vlKy/c6b7FoowV9rAJ6caUBlagDnJ6Qmnl+tI2yggh7Pf54TW5H+v1YV2AqXK0k5wAAAPVJREFUeJyN0NdSglEMBOCgEBSkWFGkCBbsWLDQQbCCYleQ938OB5N/uMr+7uWZbzY7h2gcz8QkucXrY/+Ui5kOMHPQC81MiEcJRxCKzv4hDs4hNa8qDNXCoqilGFLLK6Liq0glfKKSKaTSa6IyWaTWN0Rtwl/1bOmuHFTb/7m4o7viu0jt7Ys6OEQqfyTq+ARePBVVOEPqXBBfAHOppliyTVlNpWqbmmNAT11Nw+5pXqlptW1zreYG9DjmtmnvuVNzb5O20/Ngm1JHTdc21Uc1T7bpVdQ824ZeXsW8AUP0XhiZD2iIPr/4u+9iiAb842qIhsb7L0w/GZySIziDAAAAAElFTkSuQmCC') center center no-repeat;
+  background-size: 24px;
+  background-color: #6a78ff;
+  
+}
+
+.theme-dark div .slider .slider-bullets .slider-bullets-item:hover, .slider-bullets .slider-bullets-item.active { background: var(--contentText); }
+
+.slider {
+  margin-top: 110px;
+}
+
+.my-slider {margin-top: 0;}
+
+.slider-grid {
+  display: flex;
+  justify-content: space-between;
+}
+.slider-grid img {
+  max-width: 300px;
+}
+
+

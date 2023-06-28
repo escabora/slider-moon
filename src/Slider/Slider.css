@@ -44,8 +44,7 @@
 .slider-bullets .slider-bullets-item {
   width: 12px;
   height: 12px;
-  background-color: white;
-  border: 1px solid black;
+  background-color: #6a78ff;
   border-radius: 50%;
   overflow: hidden;
   text-indent: -999px;
@@ -56,7 +55,7 @@
 
 .slider-bullets .slider-bullets-item:hover,
 .slider-bullets .slider-bullets-item.active {
-  background-color: black;
+  background-color: #6a78ff;
   transform: scale(1.2);
 }
 
@@ -72,7 +71,7 @@
   transition: transform .3s ease-in-out;
   cursor: pointer;
   background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNNy4zMyAyNGwtMi44My0yLjgyOSA5LjMzOS05LjE3NS05LjMzOS05LjE2NyAyLjgzLTIuODI5IDEyLjE3IDExLjk5NnoiLz48L3N2Zz4=') center center no-repeat;
-  background-color: white;
+  background-color: #6a78ff;
 }
 
 .slider-nav-prev:hover,
