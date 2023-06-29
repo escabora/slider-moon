@@ -10,7 +10,7 @@ const Examples = () => {
   return (
     <div className={`${dark ? 'theme-light' : 'theme-dark'}`}>
       <header>
-        <button onClick={() => setDark(!dark)}>Tema dark</button>
+        <button onClick={() => setDark(!dark)}>theme light</button>
       </header>
       <Apresentation />
       <Default/>
