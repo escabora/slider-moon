@@ -1,49 +1,60 @@
 import React from 'react';
-import Slider from '../../Slider';
+import Slider from '../../../../src/Slider';
 import moon from '../../images/moon.jpg';
 
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-const Scale = () => {
+const Grid = () => {
   const items = [0, 1, 2, 3, 4, 5];
   return (
     <>
       <div className='container'>
-        <h3>Scale Animation</h3>
+        <h3>Grid</h3>
         <SyntaxHighlighter language='javascript' style={dracula}>
-{`<Slider
-  slideClass={'my-scale'}
+          {`
+//- your style
+.slider-grid {
+  display: flex;
+  justify-content: space-between;
+}
+
+//- your component
+<Slider
+  slideClass={'my-slider-grid'}
   infinite={true}
   bullets={true}
   arrowsNav={true}
-  animation={'scale'}
 >
-  <div className='slider my-scale'>
-    <ul className='slider-wrapper'>
-      {items.map((item) => (
-        <li key={item}>
-          <img src={moon} />
-        </li>
-      ))}
-    </ul>
+  <div>
+    <div className='slider my-slider-grid'>
+      <ul className='slider-wrapper'>
+        {items.map((item) => (
+          <li key={item} className='slider-grid'>
+            <img src={moon} />
+            <img src={moon} />
+            <img src={moon} />
+          </li>
+        ))}
+      </ul>
+    </div>
   </div>
 </Slider>`}
         </SyntaxHighlighter>
       </div>
       <Slider
-        slideClass={'my-scale'}
+        slideClass={'my-slider3'}
         infinite={true}
         bullets={true}
         arrowsNav={true}
-        animation={'scale'}
-        
       >
         <div>
-          <div className='slider my-scale'>
+          <div className='slider my-slider3'>
             <ul className='slider-wrapper'>
               {items.map((item) => (
-                <li key={item}>
+                <li key={item} className='slider-grid'>
+                  <img src={moon} />
+                  <img src={moon} />
                   <img src={moon} />
                 </li>
               ))}
@@ -58,4 +69,4 @@ const Scale = () => {
   );
 };
 
-export default Scale;
+export default Grid;

@@ -1,38 +1,28 @@
 import React from 'react';
-import Slider from '../../Slider';
+import Slider from '../../../../src/Slider';
 import moon from '../../images/moon.jpg';
 
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-const Grid = () => {
+const Default = () => {
   const items = [0, 1, 2, 3, 4, 5];
   return (
     <>
       <div className='container'>
-        <h3>Grid</h3>
+        <h3>Default</h3>
         <SyntaxHighlighter language='javascript' style={dracula}>
-          {`
-//- your style
-.slider-grid {
-  display: flex;
-  justify-content: space-between;
-}
-
-//- your component
-<Slider
-  slideClass={'my-slider-grid'}
+{`<Slider
+  slideClass={'my-slider'}
   infinite={true}
   bullets={true}
   arrowsNav={true}
 >
   <div>
-    <div className='slider my-slider-grid'>
+    <div className='slider my-slider'>
       <ul className='slider-wrapper'>
         {items.map((item) => (
-          <li key={item} className='slider-grid'>
-            <img src={moon} />
-            <img src={moon} />
+          <li key={item}>
             <img src={moon} />
           </li>
         ))}
@@ -42,19 +32,18 @@ const Grid = () => {
 </Slider>`}
         </SyntaxHighlighter>
       </div>
+
       <Slider
-        slideClass={'my-slider3'}
+        slideClass={'my-slider'}
         infinite={true}
         bullets={true}
         arrowsNav={true}
       >
         <div>
-          <div className='slider my-slider3'>
+          <div className='slider my-slider'>
             <ul className='slider-wrapper'>
               {items.map((item) => (
-                <li key={item} className='slider-grid'>
-                  <img src={moon} />
-                  <img src={moon} />
+                <li key={item}>
                   <img src={moon} />
                 </li>
               ))}
@@ -63,10 +52,10 @@ const Grid = () => {
         </div>
       </Slider>
       <div className='container'>
-        <div className='divider'></div>
+      <div className='divider'></div>
       </div>
     </>
   );
 };
 
-export default Grid;
+export default Default;

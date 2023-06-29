@@ -1,25 +1,25 @@
 import React from 'react';
-import Slider from '../../Slider';
+import Slider from '../../../../src/Slider';
 import moon from '../../images/moon.jpg';
 
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-const Default = () => {
+const NoArrows = () => {
   const items = [0, 1, 2, 3, 4, 5];
   return (
     <>
       <div className='container'>
-        <h3>Default</h3>
+        <h3>No Arrows</h3>
         <SyntaxHighlighter language='javascript' style={dracula}>
 {`<Slider
-  slideClass={'my-slider'}
+  slideClass={'my-slider-no-arrows'}
   infinite={true}
   bullets={true}
-  arrowsNav={true}
+  arrowsNav={false}
 >
   <div>
-    <div className='slider my-slider'>
+    <div className='slider my-slider-no-arrows'>
       <ul className='slider-wrapper'>
         {items.map((item) => (
           <li key={item}>
@@ -34,13 +34,13 @@ const Default = () => {
       </div>
 
       <Slider
-        slideClass={'my-slider'}
-        infinite={true}
+        slideClass={'my-slider-no-arrows'}
+        infinite={false}
         bullets={true}
-        arrowsNav={true}
+        arrowsNav={false}
       >
         <div>
-          <div className='slider my-slider'>
+          <div className='slider my-slider-no-arrows'>
             <ul className='slider-wrapper'>
               {items.map((item) => (
                 <li key={item}>
@@ -58,4 +58,4 @@ const Default = () => {
   );
 };
 
-export default Default;
+export default NoArrows;

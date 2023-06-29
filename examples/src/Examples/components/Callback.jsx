@@ -1,25 +1,26 @@
 import React from 'react';
-import Slider from '../../Slider';
+import Slider from '../../../../src/Slider';
 import moon from '../../images/moon.jpg';
 
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-const NoArrows = () => {
+const Callback = () => {
   const items = [0, 1, 2, 3, 4, 5];
   return (
     <>
       <div className='container'>
-        <h3>No Arrows</h3>
+        <h3>Callback</h3>
         <SyntaxHighlighter language='javascript' style={dracula}>
 {`<Slider
-  slideClass={'my-slider-no-arrows'}
+  slideClass={'my-slider-callback'}
   infinite={true}
   bullets={true}
-  arrowsNav={false}
+  arrowsNav={true}
+  callback={()=> window.alert('here')}
 >
   <div>
-    <div className='slider my-slider-no-arrows'>
+    <div className='slider my-slider-callback'>
       <ul className='slider-wrapper'>
         {items.map((item) => (
           <li key={item}>
@@ -34,13 +35,14 @@ const NoArrows = () => {
       </div>
 
       <Slider
-        slideClass={'my-slider-no-arrows'}
-        infinite={false}
-        bullets={true}
-        arrowsNav={false}
+        slideClass={'my-slider-callback'}
+        infinite={true}
+  bullets={true}
+  arrowsNav={true}
+  callback={()=> window.alert('here')}
       >
         <div>
-          <div className='slider my-slider-no-arrows'>
+          <div className='slider my-slider-callback'>
             <ul className='slider-wrapper'>
               {items.map((item) => (
                 <li key={item}>
@@ -58,4 +60,4 @@ const NoArrows = () => {
   );
 };
 
-export default NoArrows;
+export default Callback;

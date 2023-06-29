@@ -1,25 +1,25 @@
 import React from 'react';
-import Slider from '../../Slider';
+import Slider from '../../../../src/Slider';
 import moon from '../../images/moon.jpg';
 
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-const NoBullets = () => {
+const Infinite = () => {
   const items = [0, 1, 2, 3, 4, 5];
   return (
     <>
       <div className='container'>
-        <h3>No Bullets</h3>
+        <h3>No Infinite</h3>
         <SyntaxHighlighter language='javascript' style={dracula}>
 {`<Slider
-  slideClass={'my-slider-no-bullets'}
-  infinite={true}
-  bullets={false}
+  slideClass={'my-slider-infinite'}
+  infinite={false}
+  bullets={true}
   arrowsNav={true}
 >
   <div>
-    <div className='slider my-slider-no-bullets'>
+    <div className='slider my-slider-infinite'>
       <ul className='slider-wrapper'>
         {items.map((item) => (
           <li key={item}>
@@ -34,13 +34,13 @@ const NoBullets = () => {
       </div>
 
       <Slider
-        slideClass={'my-slider-no-bullets'}
+        slideClass={'my-slider-infinite'}
         infinite={false}
-        bullets={false}
+        bullets={true}
         arrowsNav={true}
       >
         <div>
-          <div className='slider my-slider-no-bullets'>
+          <div className='slider my-slider-infinite'>
             <ul className='slider-wrapper'>
               {items.map((item) => (
                 <li key={item}>
@@ -58,4 +58,4 @@ const NoBullets = () => {
   );
 };
 
-export default NoBullets;
+export default Infinite;

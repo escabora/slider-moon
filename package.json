@@ -26,12 +26,13 @@
   "scripts": {
     "build": "tsc && vite build",
     "build:watch": "tsc && vite build --watch",
-    "dev": "vite"
+    "dev": "vite",
+    "build:examples": "cd ./examples && yarn build",
+    "dev:examples": "cd ./examples && yarn dev"
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-syntax-highlighter": "^15.5.0"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@rollup/plugin-typescript": "^8.2.1",
