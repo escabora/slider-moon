@@ -2,30 +2,65 @@ import React from 'react';
 import Slider from '../../Slider';
 import moon from '../../images/moon.jpg';
 
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
+
 const Default = () => {
   const items = [0, 1, 2, 3, 4, 5];
   return (
-    <Slider
-    slideClass={'my-slider'}
-    infinite={true}
-    bullets={true}
-    arrowsNav={true}
-    callback={() => {
-      console.log('here');
-    }}
-  >
-    <div>
-      <div className='slider my-slider'>
-        <ul className='slider-wrapper'>
-          {items.map((item) => (
-            <li key={item}>
-              <img src={moon} />
-            </li>
-          ))}
-        </ul>
-      </div>
+    <>
+      <div className='container'>
+        <h3>Default</h3>
+        <SyntaxHighlighter language='javascript' style={dracula}>
+{`<Slider
+  slideClass={'my-slider'}
+  infinite={true}
+  bullets={true}
+  arrowsNav={true}
+  callback={() => {
+    console.log('here');
+  }}
+>
+  <div>
+    <div className='slider my-slider'>
+      <ul className='slider-wrapper'>
+        {items.map((item) => (
+          <li key={item}>
+            <img src={moon} />
+          </li>
+        ))}
+      </ul>
     </div>
-  </Slider>
+  </div>
+</Slider>`}
+        </SyntaxHighlighter>
+      </div>
+
+      <Slider
+        slideClass={'my-slider'}
+        infinite={true}
+        bullets={true}
+        arrowsNav={true}
+        callback={() => {
+          console.log('here');
+        }}
+      >
+        <div>
+          <div className='slider my-slider'>
+            <ul className='slider-wrapper'>
+              {items.map((item) => (
+                <li key={item}>
+                  <img src={moon} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </Slider>
+      <div className='container'>
+      <div className='divider'></div>
+      </div>
+    </>
   );
 };
 
