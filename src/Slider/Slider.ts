@@ -244,7 +244,9 @@ export default class SliderNav extends Slider {
         this.appendArrows();
       }
       this.slide.addEventListener('changed', () => {
-        this.callback();
+        if(this.callback) {
+          this.callback();
+        }
         this.removeClassBulletCurrent();
         this.addClassBulletCurrent(
           this.controlChildrens[this.index.active]

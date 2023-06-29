@@ -13,16 +13,13 @@ const Scale = () => {
         <h3>Scale Animation</h3>
         <SyntaxHighlighter language='javascript' style={dracula}>
 {`<Slider
-  slideClass={'my-slider1'}
+  slideClass={'my-scale'}
   infinite={true}
   bullets={true}
   arrowsNav={true}
   animation={'scale'}
-  callback={() => {
-    console.log('here scale');
-  }}
 >
-  <div className='slider my-slider1'>
+  <div className='slider my-scale'>
     <ul className='slider-wrapper'>
       {items.map((item) => (
         <li key={item}>
@@ -35,17 +32,15 @@ const Scale = () => {
         </SyntaxHighlighter>
       </div>
       <Slider
-        slideClass={'my-slider1'}
+        slideClass={'my-scale'}
         infinite={true}
         bullets={true}
         arrowsNav={true}
         animation={'scale'}
-        callback={() => {
-          console.log('here scale');
-        }}
+        
       >
         <div>
-          <div className='slider my-slider1'>
+          <div className='slider my-scale'>
             <ul className='slider-wrapper'>
               {items.map((item) => (
                 <li key={item}>

@@ -5,21 +5,22 @@ import moon from '../../images/moon.jpg';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-const Default = () => {
+const Callback = () => {
   const items = [0, 1, 2, 3, 4, 5];
   return (
     <>
       <div className='container'>
-        <h3>Default</h3>
+        <h3>Callback</h3>
         <SyntaxHighlighter language='javascript' style={dracula}>
 {`<Slider
-  slideClass={'my-slider'}
+  slideClass={'my-slider-callback'}
   infinite={true}
   bullets={true}
   arrowsNav={true}
+  callback={()=> window.alert('here')}
 >
   <div>
-    <div className='slider my-slider'>
+    <div className='slider my-slider-callback'>
       <ul className='slider-wrapper'>
         {items.map((item) => (
           <li key={item}>
@@ -34,13 +35,14 @@ const Default = () => {
       </div>
 
       <Slider
-        slideClass={'my-slider'}
+        slideClass={'my-slider-callback'}
         infinite={true}
-        bullets={true}
-        arrowsNav={true}
+  bullets={true}
+  arrowsNav={true}
+  callback={()=> window.alert('here')}
       >
         <div>
-          <div className='slider my-slider'>
+          <div className='slider my-slider-callback'>
             <ul className='slider-wrapper'>
               {items.map((item) => (
                 <li key={item}>
@@ -58,4 +60,4 @@ const Default = () => {
   );
 };
 
-export default Default;
+export default Callback;

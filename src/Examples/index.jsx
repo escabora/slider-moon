@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import Default from './components/Default';
 import Scale from './components/Scale';
 import Grid from './components/Grid';
+import Infinite from './components/Infinite';
+import Callback from './components/Callback';
 import Apresentation from './components/Apresentation';
+import NoArrows from './components/NoArrows';
+import NoBullets from './components/NoBullets';
 import Switch from './components/Switch';
 import './styles.css';
 
@@ -22,6 +26,10 @@ const Examples = () => {
       <Default />
       <Scale />
       <Grid />
+      <Infinite />
+      <Callback />
+      <NoArrows />
+      <NoBullets />
     </div>
   );
 };

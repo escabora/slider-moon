@@ -21,16 +21,13 @@ const Grid = () => {
 
 //- your component
 <Slider
-  slideClass={'my-slider3'}
+  slideClass={'my-slider-grid'}
   infinite={true}
   bullets={true}
   arrowsNav={true}
-  callback={() => {
-    console.log('here grid');
-  }}
 >
   <div>
-    <div className='slider my-slider3'>
+    <div className='slider my-slider-grid'>
       <ul className='slider-wrapper'>
         {items.map((item) => (
           <li key={item} className='slider-grid'>
@@ -50,9 +47,6 @@ const Grid = () => {
         infinite={true}
         bullets={true}
         arrowsNav={true}
-        callback={() => {
-          console.log('here grid');
-        }}
       >
         <div>
           <div className='slider my-slider3'>
