@@ -6,7 +6,7 @@
 # Slider Moon
 
 <p align="center">
-<img  width='450px' style='display:block; margin:0 auto;' src='/examples/src/images/moon-flat.png' />
+<img  width='450px' style='display:block; margin:0 auto;' src='/examples/src/images/moon-flat-design.png' />
 </p>
 
 A slide plugin for react. The main focus was to build an accessible, high-performance and easy-to-install plugin. Feel free to explore and evolve my plugin.
