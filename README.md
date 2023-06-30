@@ -5,7 +5,9 @@
 
 # Slider Moon
 
-A slide plugin for react. The main focus was to build an accessible, high-performance and easy-to-install plugin. See examples of usage below. Feel free to explore and evolve my plugin.
+A slide plugin for react. The main focus was to build an accessible, high-performance and easy-to-install plugin. Feel free to explore and evolve my plugin.
+
+<img  width='600px' style='display:block; margin:0 auto;' src='/examples/src/images/moon-flat.png' />
 
 [See the examples here](https://slider-moon.netlify.app/)
 
@@ -39,14 +41,59 @@ import 'slider-react-plugin/dist/style.css'
       <ul className='slider-wrapper'>
         {items.map((item) => (
           <li key={item}>
-            <img src={reactLogo} className='logo react' alt='React logo' />
+            <img src={yourImage} />
           </li>
         ))}
       </ul>
     </div>
 </Slider>
 ```
+## How to use
 
+options can be passed as props to the `Slider` component. See below for the options and their description.
+
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th style="width: 100px;">Name</th>
+			<th style="width: 100px;">type</th>
+			<th style="width: 50px;">default</th>
+			<th>description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>infinite</td>
+			<td>bolean</td>
+			<td>null</td>
+			<td>determines whether the slider will be infinite when reaching the last item.</td>
+		</tr>
+    <tr>
+			<td>bullets</td>
+			<td>bolean</td>
+			<td>null</td>
+			<td>enable clickable bullets under the slider.</td>
+		</tr>
+    <tr>
+			<td>arrowsNav</td>
+			<td>bolean</td>
+			<td>null</td>
+			<td>enable arrows for slider navigation.</td>
+		</tr>
+    <tr>
+			<td>animation</td>
+			<td>string</td>
+			<td>null</td>
+			<td>name of animation for slider transition.</td>
+		</tr>
+    <tr>
+			<td>callback</td>
+			<td>func</td>
+			<td>void</td>
+			<td>function that triggers every time the slider is updated (resize and click to change slide).</td>
+		</tr>
+	</tbody>
+</table>
 
 ## License
 
