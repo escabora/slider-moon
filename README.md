@@ -5,11 +5,13 @@
 
 # Slider Moon
 
+<p align="center">
+<img  width='450px' style='display:block; margin:0 auto;' src='/examples/src/images/moon-flat.png' />
+</p>
+
 A slide plugin for react. The main focus was to build an accessible, high-performance and easy-to-install plugin. Feel free to explore and evolve my plugin.
-
-<img  width='600px' style='display:block; margin:0 auto;' src='/examples/src/images/moon-flat.png' />
-
 [See the examples here](https://slider-moon.netlify.app/)
+
 
 ## Install
 
