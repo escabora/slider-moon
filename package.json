@@ -1,11 +1,17 @@
 {
-  "name": "slider-react-plugin",
-  "version": "1.0.3",
-  "description": "",
+  "name": "slider-moon",
+  "version": "1.0.0",
+  "description": "An efficient slide plugin for react",
   "author": "Gabriel Escabora <gabrielescabora@gmail.com>",
   "repository": "git@github.com:escabora/color-log.git",
   "license": "MIT",
-  "keywords": [],
+  "keywords": [
+    "react",
+    "slider",
+    "carousel",
+    "react-slider",
+    "plugin-react"
+  ],
   "exports": {
     ".": {
       "import": "./dist/index.es.js",
