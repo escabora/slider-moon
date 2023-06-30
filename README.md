@@ -26,8 +26,8 @@ or
 import the function `Slider` and css in your component.
 
 ```javascript
-import Slider from 'slider-react-plugin';
-import 'slider-react-plugin/dist/style.css'
+import Slider from 'slider-moon';
+import 'slider-moon/dist/style.css'
 
 <Slider
   slideClass={'my-slider'}
