@@ -50,7 +50,7 @@ import 'slider-react-plugin/dist/style.css'
     </div>
 </Slider>
 ```
-## How to use
+## Options
 
 options can be passed as props to the `Slider` component. See below for the options and their description.
 
@@ -97,6 +97,8 @@ options can be passed as props to the `Slider` component. See below for the opti
 	</tbody>
 </table>
 
+## Contributing
+If you have a pull request that you would like to submit, be sure to update the library version. Feel free to help and evolve the plugin.
 ## License
 
 The code is available under the [MIT License](LICENSE.md).
