@@ -57,6 +57,7 @@ p {
   padding: 20px;
   max-width: 750px;
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .divider {
@@ -100,4 +101,10 @@ p {
 
 .slider-grid img {
   max-width: 300px;
+}
+
+@media (max-width: 768px) {
+  .slider-wrapper li img {
+    max-width: 360px;
+  }
 }
